@@ -29,4 +29,43 @@ final List quiz = [
     "respostas": ["1", "3.1415", "pi", "2"],
     "alternativa_correta": 4,
   },
+  {
+    "pergunta": "dado = 'Para esperar 2 segundos em um Future uso:",
+    "respostas": ["Future.wait","Future.async","Future.delayed","Future.await"],
+    "alternativa_correta": 3,
+  },
+  {
+    "pergunta": "o que faco ao término de um Future:",
+    "respostas": [".go","await",".then","last"],
+    "alternativa_correta": 3,
+  },
+  {
+    "pergunta": "Posso usar um Provider para gerenciar State de:",
+    "respostas": [
+    "Stateless apenas",
+    "Stateful apenas",
+    "Stateless ou Stateful",
+    "nenhuma das alternativas"],
+    "alternativa_correta": 2,
+  },
+  {
+    "pergunta": "Map<String, String› estados = Map() ; como adiciono elementos no Map:",
+    "respostas": [
+    "estados.SP = 'São Paulo';",
+    "estados['SP'] = 'São Paulo';",
+    "estados=>SP = 'São Paulo';",
+    "estados..SP = 'São Paulo';",
+    ],
+    "alternativa_correta": 2,
+  },
+  {
+    "pergunta": "Map<String, String› estados = Map() ; como adiciono elementos no Map:",
+    "respostas": [
+    "estados.SP = 'São Paulo';",
+    "estados['SP'] = 'São Paulo';",
+    "estados=>SP = 'São Paulo';",
+    "estados..SP = 'São Paulo';",
+    ],
+    "alternativa_correta": 2,
+  },
 ];

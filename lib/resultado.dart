@@ -4,7 +4,7 @@ class Argumentos {
 
   int acertos = 0;
 
-  Argumentos(acertos);
+  Argumentos(this.acertos);
 }
 
 class Resultado extends StatelessWidget {

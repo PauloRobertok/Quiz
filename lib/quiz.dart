@@ -16,7 +16,47 @@ class _QuizState extends State<Quiz> {
 
   @override
   Widget build(BuildContext context) {
-    quiz.shuffle();
+    // quiz.shuffle();
+    
+    // quiz.forEach((elemento) {
+    //   int alternativaCorreta = elemento['alternativa_correta'];
+    //   List respostas = elemento['respostas'];
+
+    //   String respostaCorreta = elemento['respostas'][alternativaCorreta - 1];
+
+    //   respostas.shuffle();
+    //   int i = 1;
+    //   respostas.forEach((elemento) {
+    //     if (elemento == respostaCorreta) {
+    //       alternativaCorreta = i;
+    //     }
+    //     i++;
+    //   });
+    //   elemento['alternativa_correta'] = alternativaCorreta;
+    // });
+
+quiz.forEach((elemento) {
+  List<String> perguntas = List<String>.from([elemento['pergunta']]);
+  List<String> respostas = List<String>.from(elemento['respostas']);
+
+  List<String> perguntasEmbaralhadas = List<String>.from(perguntas)..shuffle();
+  List<String> respostasEmbaralhadas = List<String>.from(respostas)..shuffle();
+
+  elemento['pergunta'] = perguntasEmbaralhadas[0];
+  elemento['respostas'] = respostasEmbaralhadas;
+});
+
+    quiz.forEach((elemento) {
+  List<String> perguntas = List.from([elemento['pergunta']]);
+  perguntas.shuffle();
+  elemento['pergunta'] = perguntas[0];
+
+  List<String> respostas = List.from(elemento['respostas']);
+  respostas.shuffle();
+  elemento['respostas'] = respostas;
+});
+
+
     void respondeu(int respostaNumero) {
       setState(() {
         if (quiz[perguntaNumero - 1]['alternativa_correta'] == respostaNumero) {
@@ -29,7 +69,6 @@ class _QuizState extends State<Quiz> {
         print('acertos totais: $acertos erros totais: $erros');
 
         if (perguntaNumero == 10) {
-          print('terminou o quiz');
           Navigator.pushNamed(context, 'Resultado',
               arguments: Argumentos(acertos));
         } else {
