@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
               Image.asset('assets/images/logo.png'),
               ElevatedButton(
                   onPressed: () {
-                    print('Pressionado');
+                    Navigator.pushNamed(context, 'Quiz');
                   },
                   child: Text(
                     'Jogar',

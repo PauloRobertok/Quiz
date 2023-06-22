@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quiz/resultado.dart';
+import 'quiz_dados.dart';
 
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
@@ -8,37 +10,33 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
+  int perguntaNumero = 1;
+  int acertos = 0;
+  int erros = 0;
+
   @override
   Widget build(BuildContext context) {
-    List quiz = [
-      {
-        "pergunta":"Quem descobriu o Brasil?",
-        "resposta":[
-          "Dem Pedro I",
-          "Pedro Álvares Cabral",
-          "Tiradentes",
-          "Dem Pedro II",
-        ],
-        "alternativa_correta":2,
-      }
-    ];
+    quiz.shuffle();
+    void respondeu(int respostaNumero) {
+      setState(() {
+        if (quiz[perguntaNumero - 1]['alternativa_correta'] == respostaNumero) {
+          print('acertou');
+          acertos++;
+        } else {
+          print('errou');
+          erros++;
+        }
+        print('acertos totais: $acertos erros totais: $erros');
 
-    quiz.add(
-      {
-        "pergunta":"O Flutter é :",
-        "respostas": [
-          "Uma linguagem",
-          "Um aplicativo",
-          "Um SDK",
-          "Um notebook"
-        ],
-        "alternativa_correta":2,
-      }
-    );
-    print('Dados do Quiz');
-    print(quiz);
-
-  int perguntaNumero = 2;
+        if (perguntaNumero == 10) {
+          print('terminou o quiz');
+          Navigator.pushNamed(context, 'Resultado',
+              arguments: Argumentos(acertos));
+        } else {
+          perguntaNumero++;
+        }
+      });
+    }
 
     return MaterialApp(
       home: Scaffold(
@@ -54,63 +52,67 @@ class _QuizState extends State<Quiz> {
                       alignment: Alignment.topRight,
                       child: Text('Pergunta $perguntaNumero de 10',
                           style: TextStyle(fontSize: 20))),
-                  Text(quiz[perguntaNumero - 1]['pergunta'] ,
-                   style: TextStyle(fontSize: 20)),
+                  Text(quiz[perguntaNumero - 1]['pergunta'],
+                      style: TextStyle(fontSize: 20)),
                   SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      print('Pressionado');
-                    },
-                    child: Text(
-                      quiz[perguntaNumero - 1]['respostas'][0],
-                      style: TextStyle(fontSize: 20),
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        print('Pressionado');
+                        respondeu(1);
+                      },
+                      child: Text(
+                        quiz[perguntaNumero - 1]['respostas'][0],
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.fromLTRB(90, 20, 90, 20)),
                     ),
-                    style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.fromLTRB(90, 20, 90, 20)),
-                  ),
-                  ),
-                  SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      print('Pressionado');
-                    },
-                    child: Text(
-                      quiz[perguntaNumero - 1]['respostas'][1],
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.fromLTRB(90, 20, 90, 20)),
-                  ),
                   ),
                   SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      print('Pressionado');
-                    },
-                    child: Text(
-                      quiz[perguntaNumero - 1]['respostas'][2],
-                      style: TextStyle(fontSize: 20),
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        print('Pressionado');
+                        respondeu(2);
+                      },
+                      child: Text(
+                        quiz[perguntaNumero - 1]['respostas'][1],
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.fromLTRB(90, 20, 90, 20)),
                     ),
-                    style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.fromLTRB(90, 20, 90, 20)),
-                  ),
                   ),
                   SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      print('Pressionado');
-                    },
-                    child: Text(
-                      quiz[perguntaNumero - 1]['respostas'][3],
-                      style: TextStyle(fontSize: 20),
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        print('Pressionado');
+                        respondeu(3);
+                      },
+                      child: Text(
+                        quiz[perguntaNumero - 1]['respostas'][2],
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.fromLTRB(90, 20, 90, 20)),
                     ),
-                    style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.fromLTRB(90, 20, 90, 20)),
                   ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        print('Pressionado');
+                        respondeu(4);
+                      },
+                      child: Text(
+                        quiz[perguntaNumero - 1]['respostas'][3],
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.fromLTRB(90, 20, 90, 20)),
+                    ),
                   ),
                 ])),
       ),
